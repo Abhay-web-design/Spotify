@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+    <link href="./output.css" rel="stylesheet">
+    <style>
+       
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        .animate-fade-out { animation: fadeOut 0.3s ease-in forwards; }
+
+        @keyframes bar1 { 0% { height: 2px; } 50% { height: 20px; } 100% { height: 2px; } }
+        @keyframes bar2 { 0% { height: 5px; } 50% { height: 15px; } 100% { height: 5px; } }
+        @keyframes bar3 { 0% { height: 10px; } 50% { height: 25px; } 100% { height: 10px; } }
+
+        .animate-bar1 { animation: bar1 1s infinite ease-in-out; }
+        .animate-bar2 { animation: bar2 1s infinite ease-in-out; }
+        .animate-bar3 { animation: bar3 1s infinite ease-in-out; }
+
+
+    </style>
+</head>
+<body>
+    <div class="w-screen h-screen bg-black overflow-y-scroll">
+        <!-- Hamburger for small screens -->
+<button id="hamburger" class="text-white text-3xl block md:hidden ml-4">
+  <i class="ri-menu-line"></i>
+</button>
+ 
+        <nav class="h-15 flex items-center justify-between">
+            <div class="flex items-center">
+           <img class="w-8 h-10 m-4" src="logo.svg" alt="logo">
+            <p class="text-2xl w-12 h-12  bg-[#1F1F1F] rounded-full text-center p-2 m-4 text-white"><i class="ri-home-5-fill "></i></p>
+            <p class="text-2xl w-12 h-12  bg-[#1F1F1F] rounded-full md:rounded-r-2xl text-center p-2  text-white"><i class="ri-search-line "></i></p>
+            <input class="text-2xl h-12 bg-[#1F1F1F] rounded-r-3xl text-center p-2  text-white focus:outline-gray-600 hidden md:block" type="text" placeholder="What you want to play!" >
+            </div>
+            <div class=" flex items-center">
+                <a class="text-md text-[#899f9c] font-medium hover:text-white" href="#">Sign up</a>
+                <button class="h-full bg-white text-xl font-bold px-7 py-2.5 rounded-3xl m-2 hover:scale-105"> Log in</button>
+            </div>
+
+        </nav>
+
+
+       <div class="p-2 flex gap-1.5 w-full">
+             <!-- library -->
+             <div id="library" class="hidden md:block bg-[#1F1F1F] rounded-lg w-full md:w-1/4 transition-all duration-300">
+
+                <!-- library head  -->
+               <p class="flex items-center justify-between p-4"><span class="text-xl font-bold text-white">Your Library</span> 
+                <span class="text-xl p-2 hover:bg-[#343434] text-white text-center rounded-full font-medium"><i class="ri-add-line"></i></span></p>
+                <!-- library card  -->
+                <div class="h-70 p-2 overflow-y-scroll">
+                    <div class="bg-[#343434] rounded-xl p-4" >
+                        <p class="text-md text-white font-bold" >Create your first playlist</p>
+                        <p class="text-md text-white font-medium" >It's easy, we'll help you</p>
+                        <button class="text-md font-bold bg-white mt-4 px-5 py-2 rounded-3xl"> Create playlist</button>
+                    </div>
+                     
+                        <div class="bg-[#343434] rounded-xl p-4 mt-4">
+                            <p class="text-md text-white font-bold">Let's find some podcasts to follow</p>
+                            <p class="text-md text-white font-medium">We'll keep you updated on new episodes</p>
+                            <button class="text-md font-bold bg-white mt-4 px-5 py-2 rounded-3xl">Browse podcasts</button>
+                        </div>
+                </div>
+                 <!-- library footer  -->
+                  <div class="p-4 mt-8 h-50">
+                      <a class="text-xs text-[#899F9C] font-medium hover:text-white m-1.5" href="#">Legal</a>
+                      <a class="text-xs text-[#899F9C] font-medium hover:text-white m-1.5 " href="#">Safety & Privacy Center</a>
+                      <a class="text-xs text-[#899F9C] font-medium hover:text-white m-1.5" href="#">Privacy Policy</a>
+                      <a class="text-xs text-[#899F9C] font-medium hover:text-white m-1.5" href="#">Cookies</a>
+                      <a class="text-xs text-[#899F9C] font-medium hover:text-white m-1.5" href="#">About Ads</a>
+                      <a class="text-xs text-[#899F9C] font-medium hover:text-white m-1.5" href="#">Accessibilty</a>
+                </div>
+
+
+             </div>
+
+             <!-- playlist  -->
+                <div id="playlistContainer" class="w-full md:w-3/4 transition-all duration-300"></div>
+                     <!-- player  -->
+
+              <div id="bottom-player" class="  bg-[#1F1F1F] w-full h-20 rounded-lg fixed bottom-0 shadow-md z-50 flex items-center p-2 justify-between"> 
+                            <div class="flex items-center">
+                                <div class=" w-20 h-18 " >
+                                <img class="w-full h-full" src="/songs/Angry/cover.jpg" alt="cover photo">
+                            </div>
+                            <div class="ml-3">
+                              <p class="text-xl font-semibold text-white mt-1 song-title">Song Title</p>
+                                <p class="text-[12px] font-medium text-[#899f9c] mt-1 song-desc">Playlist name</p>
+                                    </div>
+
+                                    <div id="now-playing-bars" class="ml-3 flex items-end gap-[3px]">
+                                            <span class="w-[3px] h-2 bg-green-400 animate-bar1"></span>
+                                            <span class="w-[3px] h-4 bg-green-400 animate-bar2"></span>
+                                            <span class="w-[3px] h-3 bg-green-400 animate-bar3"></span>
+                                    </div>
+
+                                </div>
+                   <!-- play next previous  -->
+                <div class="hidden sm:flex flex-col items-center w-full px-4">
+                    <div class="text-3xl text-white">
+                        <i id="backward" class="ri-skip-back-fill"></i>
+                        <i class="ri-play-circle-fill" id="play-toggle"></i>
+                        <i id="forward" class="ri-skip-forward-fill"></i>
+                    </div>
+                    <div class="w-full flex items-center gap-2">
+                        <span id="time-label" class="text-white text-sm">00:00</span>
+                        <input id="song-progress" type="range" value="0" class="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer">
+                    </div>
+                    </div>
+
+                <!-- volume  -->
+                 <div class="hidden md:flex items-center mr-5">
+                    <i class="ri-volume-up-fill text-2xl text-[#899f9c]"></i>
+                    <input id="volume-range" type="range" value="100" class="ml-2 w-24 h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer">
+                </div>
+
+              </div>
+
+
+              <!-- player card  -->
+               <div id="top-player" class=" hidden w-screen h-screen  flex-col items-center justify-center ">
+                <div id="down-arrow" class="text-4xl text-white"><i class="ri-arrow-down-s-line"></i></div>
+                      <div class=" rounded-2xl p-4 mt-4">
+                            <div class="flex items-center flex-col">
+                                <div class=" h-1/2 rounded-2xl" >
+                                <img class="w-full h-full rounded-2xl" src="/songs/Angry/cover.jpg" alt="cover photo"></div>
+                                <p class=" text-4xl font-semibold text-white mt-1 ">Angry</p>
+                                <p class="text-[22px] font-medium text-[#899f9c] mt-1"> play some angry songs </p>
+                                </div>
+                            </div>
+
+                                  <!-- play next previous  -->
+                <div class="flex flex-col items-center">
+                <div class="text-5xl text-white ">
+                   <i class="ri-skip-back-fill"></i> <i class="ri-play-circle-fill"></i> <i class="ri-skip-forward-fill"></i>
+                </div>
+                <div class="w-90">
+                 <input class="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-lg" type="range" value="0" id="">
+                </div>
+                
+                </div>
+                <!-- volume  -->
+                 <div class="flex items-center justify-center mt-5">
+                    <i class="ri-volume-up-fill text-2xl text-[#899f9c] "></i>
+                 <input class=" ml-2  h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-lg" type="range" value="0" id="">
+                </div>
+
+               </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
